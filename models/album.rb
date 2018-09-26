@@ -71,7 +71,7 @@ class Album
       artist_id,
       album_name,
       genre
-      ) = (1$, 2$, 3$)
+      ) = ($1, $2, $3)
       WHERE id = $4;
       "
       values = [

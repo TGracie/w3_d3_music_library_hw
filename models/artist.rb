@@ -35,6 +35,16 @@ class Artist
     return artist_objects
   end
   #####################################################################
+
+  def self.find(id)
+    sql = 'SELECT * FROM artists
+    WHERE id = id;'
+    result = SqlRunner.run(sql)
+    result_hash = result[0]
+
+    Artist.new(result_hash)
+  end
+  #####################################################################
   #####################################################################
   ## OBJECT METHODS ##
 
@@ -61,14 +71,42 @@ class Artist
   end
   #####################################################################
 
-  # def update()
-  #   sql = "
-  #   UPDATE artists
-  #   SET (
-  #     first_name,
-  #     last_name
-  #     )"
-  # end
+  def update()
+    sql = "
+    UPDATE artists
+    SET (
+      first_name,
+      last_name
+      ) = ($1, $2)
+      WHERE id = $3;"
+      values = [
+        @first_name,
+        @last_name,
+        @id
+      ]
+      result = SqlRunner.run(sql, values)
+  end
+  #####################################################################
+
+  def albums()
+    sql = '
+    SELECT * FROM albums
+    WHERE artist_id = $1;'
+
+    results = SqlRunner.run(sql, [@id])
+
+    albums = results.map do | album_hash |
+      Album.new(album_hash)
+    end
+    return albums
+  end
+  ####################################################################
+
+  def delete()
+    sql = 'DELETE FROM artists
+    WHERE id = $1'
+    SqlRunner.run(sql, [@id])
+  end
 
   #####################################################################
   #####################################################################
