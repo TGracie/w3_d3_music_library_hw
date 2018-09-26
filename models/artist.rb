@@ -4,7 +4,7 @@ require_relative('../db/sql_runner.rb')
 class Artist
 
   #####################################################################
-  attr_accessor(:name)
+  attr_accessor(:first_name, :last_name)
   attr_reader(:id)
   #####################################################################
 
@@ -30,8 +30,8 @@ class Artist
 
     artist_hashes = SqlRunner.run(sql)
 
-    artist_objects = artist_hashes.map do |artist_hash| Artist.new(album_hash)
-    end
+    artist_objects = artist_hashes.map do |artist_hash|         Artist.new(album_hash)
+      end
     return artist_objects
   end
   #####################################################################

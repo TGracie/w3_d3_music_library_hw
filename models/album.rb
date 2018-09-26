@@ -71,9 +71,31 @@ class Album
       artist_id,
       album_name,
       genre
-      )"
+      ) = (1$, 2$, 3$)
+      WHERE id = $4;
+      "
+      values = [
+        @artist_id,
+        @album_name,
+        @genre
+      ]
+      result = SqlRunner.run(sql, values)
   end
+  #####################################################################
 
+  def artist()
+    sql = "
+    SELECT * FROM artists
+    WHERE id = $1;
+    "
+    results = SqlRunner.run(sql, [@artist_id])
+
+    artist_hash = results[0]
+
+    artist = Artist.new(artist_hash)
+
+    return artist
+  end
   #####################################################################
   #####################################################################
 end ## CLASS END ##

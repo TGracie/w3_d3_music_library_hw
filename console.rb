@@ -17,18 +17,20 @@ Artist.delete_all()
       })
       ezra.save
 
-  stadium_arcadium = Album.new({
+  album1 = Album.new({
+    'artist_id' => rhcp.id,
     'album_name' => 'Stadium Arcadium',
     'genre' => 'Rock'
     })
 
-  staying_at_tams = Album.new({
+  album2 = Album.new({
+    'artist_id' => ezra.id,
     'album_name' => 'Staying at Tamara''s',
     'genre' => 'Singer-songwriter'
     })
 
-    stadium_arcadium.save()
-    staying_at_tams.save()
+    album1.save()
+    album2.save()
 
     # albums = Album.all()
 
